@@ -40,33 +40,49 @@
 	
 	<int:channel id="toXMLHandler"></int:channel>
 	
+	<!-- Content Base Router -->
 	
-	<!-- DOM Document Handler -->
-	
-	<int:service-activator id="dOMDocumentHandlerServiceActivator" 
-				ref="dOMDocumentHandler"
-				method="process"
-				input-channel="toXMLHandler">
+	<int:service-activator id="contentBasedRouterServiceActivator" 
+			ref="contentBasedRouter"
+			method="route"
+			input-channel="toXMLHandler">
 	</int:service-activator>
-	<bean id="dOMDocumentHandler" 
-				class="hu.bme.mit.v37zen.prepayment.integration.DOMDocumentHandler">
-				<constructor-arg name="toSyncDataHandlerChannel">
-					<ref bean="toSyncDataHandler"/>
-				</constructor-arg>
-				<constructor-arg name="toMeterDataHandlerChannel">
-					<ref bean="toMeterDataHandler"/>
-				</constructor-arg>
-				
-				<property name="namespaceHandler">
-					<ref bean="namespaceHandler" />
-					<!-- Defined in: META-INF/context.xml -->
-				</property>
-				
-				<property name="syncMessageSelectorString" value="${dataSync.xpath.syncMessageSelectorString}"></property>
-				<property name="syncMessageDistinctiveValue" value="${dataSync.xpath.syncMessageDistinctiveValue}"></property>
-				<property name="meterDataMessageSelectorString" value="${meterData.xpath.meterDataMessageSelectorString}"></property>
-				<property name="meterDataMessageDistinctiveValue" value="${meterData.xpath.meterDataMessageDistinctiveValue}"></property>
+	
+	<bean id="contentBasedRouter" class="hu.bme.mit.v37zen.prepayment.integration.ContentBasedRouter">
+		<constructor-arg name="routingTable">
+			<map>
+				<entry key="syncMessageRoutingRule" value-ref="syncMessageRoutingRule" />
+				<entry key="meterDataRoutingRule" value-ref="meterDataRoutingRule" />
+			</map>
+		</constructor-arg>
+	</bean>	
+	
+	<!-- "RoutingTable" -->
+	<bean id="syncMessageRoutingRule"  class="hu.bme.mit.v37zen.prepayment.integration.RoutingRule" scope="prototype">
+		<constructor-arg name="namespaces">
+			<ref bean="namespaceHandler" />
+			<!-- Defined in: META-INF/context.xml -->
+		</constructor-arg>
+		<constructor-arg name="contentSelectorString" value="${dataSync.xpath.syncMessageSelectorString}" />
+		<constructor-arg name="exceptedContent" value="${dataSync.xpath.syncMessageDistinctiveValue}" />
+		<constructor-arg name="route">
+			<ref bean="toSyncDataHandler" />
+		</constructor-arg>
 	</bean>
+	
+	<bean id="meterDataRoutingRule"  class="hu.bme.mit.v37zen.prepayment.integration.RoutingRule" scope="prototype">
+		<constructor-arg name="namespaces">
+			<ref bean="namespaceHandler" />
+			<!-- Defined in: META-INF/context.xml -->
+		</constructor-arg>
+		<constructor-arg name="contentSelectorString" value="${meterData.xpath.meterDataMessageSelectorString}" />
+		<constructor-arg name="exceptedContent" value="${meterData.xpath.meterDataMessageDistinctiveValue}" />
+		<constructor-arg name="route">
+			<ref bean="toSyncDataHandler" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- "RoutingTable" END -->
 	
 	<int:channel id="toSyncDataHandler"></int:channel>
 	
@@ -97,6 +113,34 @@
 				<!-- Defined in: META-INF/context.xml -->
 			</constructor-arg>
 	</bean>
-	
-	
 </beans>
+	
+	<!-- Legacy Things -->
+	
+		<!-- DOM Document Handler -->
+	
+<!-- 	<int:service-activator id="dOMDocumentHandlerServiceActivator"  -->
+<!-- 				ref="dOMDocumentHandler" -->
+<!-- 				method="process" -->
+<!-- 				input-channel="toXMLHandler"> -->
+<!-- 	</int:service-activator> -->
+
+<!-- 	<bean id="dOMDocumentHandler"  -->
+<!-- 				class="hu.bme.mit.v37zen.prepayment.integration.DOMDocumentHandler"> -->
+<!-- 				<constructor-arg name="toSyncDataHandlerChannel"> -->
+<!-- 					<ref bean="toSyncDataHandler"/> -->
+<!-- 				</constructor-arg> -->
+<!-- 				<constructor-arg name="toMeterDataHandlerChannel"> -->
+<!-- 					<ref bean="toMeterDataHandler"/> -->
+<!-- 				</constructor-arg> -->
+				
+<!-- 				<property name="namespaceHandler"> -->
+<!-- 					<ref bean="namespaceHandler" /> -->
+<!-- 					Defined in: META-INF/context.xml -->
+<!-- 				</property> -->
+				
+<!-- 				<property name="syncMessageSelectorString" value="${dataSync.xpath.syncMessageSelectorString}"></property> -->
+<!-- 				<property name="syncMessageDistinctiveValue" value="${dataSync.xpath.syncMessageDistinctiveValue}"></property> -->
+<!-- 				<property name="meterDataMessageSelectorString" value="${meterData.xpath.meterDataMessageSelectorString}"></property> -->
+<!-- 				<property name="meterDataMessageDistinctiveValue" value="${meterData.xpath.meterDataMessageDistinctiveValue}"></property> -->
+<!-- 	</bean> -->
