@@ -1,0 +1,110 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+jar {
+    baseName = 'prepayment-data-synchronization'
+    version =  '0.1.0'
+    
+    manifest.attributes provider: 'BME V37ZEN'
+    
+    from sourceSets.main.allSource
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+//Source folders:
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java"]
+            
+            exclude 'hu/bme/mit/v37zen/sm/adapter/xml/nodemappers/**'
+        }
+        resources {
+        	srcDirs = ["src/main/resource"]
+        }
+    }
+    test {
+    	java {
+    		srcDirs = ["src/test/java"]
+    	}
+    	resources {
+        	srcDirs = ["src/test/resource"]
+        }
+    }
+}
+
+configurations { 
+	providedCompile 
+	loggingLib
+	testLib	
+}
+
+sourceSets.main.compileClasspath += configurations.providedCompile
+sourceSets.test.compileClasspath += configurations.providedCompile
+sourceSets.test.runtimeClasspath += configurations.providedCompile
+
+sourceSets.main.compileClasspath += configurations.loggingLib
+sourceSets.test.compileClasspath += configurations.loggingLib
+sourceSets.test.runtimeClasspath += configurations.loggingLib
+
+sourceSets.main.compileClasspath += configurations.testLib
+sourceSets.test.compileClasspath += configurations.testLib
+sourceSets.test.runtimeClasspath += configurations.testLib
+
+
+eclipse {
+	project {
+		natures 'org.springsource.ide.eclipse.gradle.core.nature', 
+				'org.eclipse.jdt.core.javanature',
+				'org.springframework.ide.eclipse.core.springnature'			
+	}
+	classpath {
+		containers 'org.springsource.ide.eclipse.gradle.classpathcontainer'
+	}
+}
+
+def localVariable = "localVariable"
+
+ext {
+	extraProperty = "Extra properties can be added, read and set via the owning object's ext property. Alternatively, an ext block can be used to add multiple properties at once."
+
+	libCompile = 'lib-compile'
+	libProvidedCompile = 'lib-provided-compile'
+	libLogging = 'lib-logging'
+	libTest = 'lib-test'
+	libExcel = 'lib-excel'
+	
+	libDrools = 'lib-drools'
+}
+
+dependencies {
+
+	ext.libsBaseDir = 's:/eclipse_workspaces/DPT_II_2/dependency-management-project/'
+
+	//ext.datamodelVersion = '1.0'
+	
+	///Dependencies:	
+	//compile files("../lib/datamodel-jar-${datamodelVersion}.jar")
+	
+	//providedCompile fileTree(dir: '../lib', include: '*.jar')
+	
+	compile fileTree(dir: "${libsBaseDir}${libCompile}", include: '*.jar')
+	providedCompile fileTree(dir: "${libsBaseDir}${libProvidedCompile}", include: '*.jar')	
+	
+	//compile fileTree(dir: "${libsBaseDir}${libDrools}", include: '*.jar')
+	
+	compile fileTree(dir: "${libsBaseDir}${libLogging}", include: '*.jar')
+	
+	//providedCompile fileTree(dir: "${libsBaseDir}${libCompile}", include: '*.jar')
+	
+	testCompile fileTree(dir: "${libsBaseDir}${libTest}", include: '*.jar')
+	
+}
+
