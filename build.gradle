@@ -23,6 +23,8 @@ sourceSets {
     main {
         java {
             srcDirs = ["src/main/java"]
+            
+            exclude 'hu/bme/mit/v37zen/sm/adapter/xml/nodemappers/**'
         }
         resources {
         	srcDirs = ["src/main/resource"]
@@ -93,7 +95,7 @@ dependencies {
 	
 	//providedCompile fileTree(dir: '../lib', include: '*.jar')
 	
-	providedCompile fileTree(dir: "${libsBaseDir}${libCompile}", include: '*.jar')
+	compile fileTree(dir: "${libsBaseDir}${libCompile}", include: '*.jar')
 	providedCompile fileTree(dir: "${libsBaseDir}${libProvidedCompile}", include: '*.jar')	
 	
 	//compile fileTree(dir: "${libsBaseDir}${libDrools}", include: '*.jar')
