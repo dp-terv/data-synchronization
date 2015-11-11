@@ -78,7 +78,7 @@
 		<constructor-arg name="contentSelectorString" value="${meterData.xpath.meterDataMessageSelectorString}" />
 		<constructor-arg name="exceptedContent" value="${meterData.xpath.meterDataMessageDistinctiveValue}" />
 		<constructor-arg name="route">
-			<ref bean="toSyncDataHandler" />
+			<ref bean="toMeterDataHandler" />
 		</constructor-arg>
 	</bean>
 	

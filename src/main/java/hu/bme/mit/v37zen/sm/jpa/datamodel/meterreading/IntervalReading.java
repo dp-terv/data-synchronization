@@ -4,7 +4,6 @@ import hu.bme.mit.v37zen.sm.jpa.datamodel.BaseEntity;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.MeterAsset;
 
 import java.util.Date;
-import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +39,7 @@ public class IntervalReading extends BaseEntity {
 	
 	private Integer intervalLength;
 	
-	private UUID readingBlock;
+	private String readingBlock;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
@@ -53,7 +52,7 @@ public class IntervalReading extends BaseEntity {
 			String referenceIdType, String referenceIdNamepsace,
 			String readingTypeId, Double value, Boolean valid,
 			Boolean processed, Boolean archived, int intervalLength,
-			UUID readingBlock, Date endTime) {
+			String readingBlock, Date endTime) {
 		super();
 		this.meterAsset = meterAsset;
 		this.meterReferenceId = meterReferenceId;
@@ -157,11 +156,11 @@ public class IntervalReading extends BaseEntity {
 		this.intervalLength = intervalLength;
 	}
 
-	public UUID getReadingBlock() {
+	public String getReadingBlock() {
 		return readingBlock;
 	}
 
-	public void setReadingBlock(UUID readingBlock) {
+	public void setReadingBlock(String readingBlock) {
 		this.readingBlock = readingBlock;
 	}
 

@@ -4,7 +4,6 @@ import hu.bme.mit.v37zen.prepayment.rating.MeterDataProcessor;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,38 +21,7 @@ import org.w3c.dom.Node;
 public class XPathUtil {
 	
 	public static Logger logger = LoggerFactory.getLogger(MeterDataProcessor.class);
-	
-	
-	@SuppressWarnings("unchecked")
-	public static <T> T evaluate(String expression, Node node, Map<String,String> namespaces, Class<T> returnType){
-		
-		if(String.class.equals(returnType)){
-			return (T) evaluateAsString(expression, node, namespaces);
-		}
-		if(Integer.class.equals(returnType)){
-			return (T) evaluateAsInteger(expression, node, namespaces);
-		}
-		if(Double.class.equals(returnType)){
-			return (T) evaluateAsDouble(expression, node, namespaces);
-		}
-		if(Boolean.class.equals(returnType)){
-			return (T) evaluateAsBoolean(expression, node, namespaces);
-		}
-		if(Date.class.equals(returnType)){
-			return (T) evaluateAsDate(expression, new SimpleDateFormat(), node, namespaces);
-		}
-		if(List.class.equals(returnType)){
-			try{
-				return (T) evaluateAsNodeList(expression, node, namespaces);
-			} catch(Exception e)
-			{
-				logger.error(e.getMessage(), e);
-				return null;
-			}
-		}		
-		return null;
-	}
-	
+
 	
 	public static List<Node> evaluateAsNodeList(String expression, Node node, Map<String,String> namespaces){
 		if(expression == null || expression.isEmpty()){
@@ -114,8 +82,13 @@ public class XPathUtil {
 		}
 		
 		try {
-			return Integer.parseInt(expr.evaluateAsString(node));
+				String s = expr.evaluateAsString(node);
+				return Integer.parseInt(s);
+			
 		} catch (XPathException e) {
+			logger.error(e.getMessage());
+			return null;
+		} catch (NumberFormatException e) {
 			logger.error(e.getMessage());
 			return null;
 		}

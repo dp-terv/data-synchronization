@@ -4,6 +4,7 @@
 package hu.bme.mit.v37zen.prepayment.rating;
 
 import hu.bme.mit.v37zen.prepayment.util.xml.DOMNodeToString;
+import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,8 @@ public class MeterDataMessageHandler implements ApplicationContextAware {
 	public final static Logger logger = LoggerFactory.getLogger(MeterDataMessageHandler.class);
 	
 	private ThreadPoolTaskExecutor taskExecutor;
+		
+	private NamespaceHandler namespaceHandler;
 	
 	private ApplicationContext applicationContext;
 		
@@ -54,5 +57,13 @@ public class MeterDataMessageHandler implements ApplicationContextAware {
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
 		this.applicationContext = applicationContext;
+	}
+
+	public NamespaceHandler getNamespaceHandler() {
+		return namespaceHandler;
+	}
+
+	public void setNamespaceHandler(NamespaceHandler namespaceHandler) {
+		this.namespaceHandler = namespaceHandler;
 	}
 }

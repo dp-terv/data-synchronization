@@ -214,6 +214,9 @@
 		<constructor-arg name="namespaceHandler">
 			<ref bean="namespaceHandler" />
 		</constructor-arg>	
+		<property name="intervalReadingConfigurator">
+			<ref bean="intervalReadingConfigurator" />
+		</property>
 	</bean>
 	<!-- XML processors -->
 	
