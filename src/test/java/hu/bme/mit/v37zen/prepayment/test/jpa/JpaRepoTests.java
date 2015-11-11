@@ -3,7 +3,9 @@ package hu.bme.mit.v37zen.prepayment.test.jpa;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.Account;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.Parameter;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.ServiceDeliveryPoint;
+import hu.bme.mit.v37zen.sm.jpa.datamodel.meterreading.IntervalReading;
 import hu.bme.mit.v37zen.sm.jpa.repositories.AccountRepository;
+import hu.bme.mit.v37zen.sm.jpa.repositories.IntervalReadingRepository;
 import hu.bme.mit.v37zen.sm.jpa.repositories.ServiceDeliveryPointRepository;
 
 import java.util.Date;
@@ -31,6 +33,9 @@ public class JpaRepoTests {
 	
 	@Autowired
 	private ServiceDeliveryPointRepository sdpRepo;
+	
+	@Autowired
+	private IntervalReadingRepository intervalRepo;
 	
 	@AfterClass
 	public static void sleepFor5Min(){
@@ -93,6 +98,23 @@ public class JpaRepoTests {
 		Assert.assertTrue(sdpRepo.findAll().contains(sdp));
 		
 	}
-
 	
+	@Test
+	public void meterReadingTest(){
+		
+		//IBM-PB-MET-20
+		String referenceId = "IBM-PB-MET-20";
+		
+		
+		IntervalReading i = new IntervalReading(null,
+				referenceId, IntervalReading.METER_X_UDC_ASSET_ID, "NAMSPACE", 
+				"1-1:1.8.0.0", 326.45, true, false, null, new Date());
+		intervalRepo.saveAndFlush(i);
+		
+		//Assert.assertEquals(i, intervalRepo.findByMeterReferenceId(referenceId).get(0));
+		Assert.assertEquals(1, intervalRepo.findByMeterReferenceId(referenceId).size());
+		
+		assert i.equals(intervalRepo.findByMeterReferenceId(referenceId).get(0));
+		
+	}	
 }
