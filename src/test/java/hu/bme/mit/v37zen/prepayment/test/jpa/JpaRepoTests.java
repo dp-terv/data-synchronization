@@ -9,6 +9,7 @@ import hu.bme.mit.v37zen.sm.jpa.repositories.IntervalReadingRepository;
 import hu.bme.mit.v37zen.sm.jpa.repositories.ServiceDeliveryPointRepository;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -108,7 +109,7 @@ public class JpaRepoTests {
 		
 		IntervalReading i = new IntervalReading(null,
 				referenceId, IntervalReading.METER_X_UDC_ASSET_ID, "NAMSPACE", 
-				"1-1:1.8.0.0", 326.45, true, false, null, new Date());
+				"1-1:1.8.0.0", 326.45, true, false, null, 900, UUID.randomUUID(), new Date());
 		intervalRepo.saveAndFlush(i);
 		
 		//Assert.assertEquals(i, intervalRepo.findByMeterReferenceId(referenceId).get(0));

@@ -4,6 +4,7 @@ import hu.bme.mit.v37zen.sm.jpa.datamodel.BaseEntity;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.MeterAsset;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,6 +38,10 @@ public class IntervalReading extends BaseEntity {
 	
 	private Boolean archived;
 	
+	private Integer intervalLength;
+	
+	private UUID readingBlock;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	
@@ -47,7 +52,8 @@ public class IntervalReading extends BaseEntity {
 	public IntervalReading(MeterAsset meterAsset, String meterReferenceId,
 			String referenceIdType, String referenceIdNamepsace,
 			String readingTypeId, Double value, Boolean valid,
-			Boolean processed, Boolean archived, Date endTime) {
+			Boolean processed, Boolean archived, int intervalLength,
+			UUID readingBlock, Date endTime) {
 		super();
 		this.meterAsset = meterAsset;
 		this.meterReferenceId = meterReferenceId;
@@ -58,6 +64,8 @@ public class IntervalReading extends BaseEntity {
 		this.valid = valid;
 		this.processed = processed;
 		this.archived = archived;
+		this.intervalLength = intervalLength;
+		this.readingBlock = readingBlock;
 		this.endTime = endTime;
 	}
 
@@ -141,6 +149,22 @@ public class IntervalReading extends BaseEntity {
 		this.archived = archived;
 	}
 
+	public int getIntervalLength() {
+		return intervalLength;
+	}
+
+	public void setIntervalLength(int intervalLength) {
+		this.intervalLength = intervalLength;
+	}
+
+	public UUID getReadingBlock() {
+		return readingBlock;
+	}
+
+	public void setReadingBlock(UUID readingBlock) {
+		this.readingBlock = readingBlock;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -148,14 +172,18 @@ public class IntervalReading extends BaseEntity {
 		result = prime * result
 				+ ((archived == null) ? 0 : archived.hashCode());
 		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
+		result = prime * result + intervalLength;
 		result = prime * result
 				+ ((meterAsset == null) ? 0 : meterAsset.hashCode());
+		result = prime
+				* result
+				+ ((meterReferenceId == null) ? 0 : meterReferenceId.hashCode());
 		result = prime * result
 				+ ((processed == null) ? 0 : processed.hashCode());
 		result = prime * result
-				+ ((readingTypeId == null) ? 0 : readingTypeId.hashCode());
+				+ ((readingBlock == null) ? 0 : readingBlock.hashCode());
 		result = prime * result
-				+ ((meterReferenceId == null) ? 0 : meterReferenceId.hashCode());
+				+ ((readingTypeId == null) ? 0 : readingTypeId.hashCode());
 		result = prime
 				* result
 				+ ((referenceIdNamepsace == null) ? 0 : referenceIdNamepsace
@@ -186,25 +214,32 @@ public class IntervalReading extends BaseEntity {
 				return false;
 		} else if (!endTime.equals(other.endTime))
 			return false;
+		if (intervalLength != other.intervalLength)
+			return false;
 		if (meterAsset == null) {
 			if (other.meterAsset != null)
 				return false;
 		} else if (!meterAsset.equals(other.meterAsset))
+			return false;
+		if (meterReferenceId == null) {
+			if (other.meterReferenceId != null)
+				return false;
+		} else if (!meterReferenceId.equals(other.meterReferenceId))
 			return false;
 		if (processed == null) {
 			if (other.processed != null)
 				return false;
 		} else if (!processed.equals(other.processed))
 			return false;
+		if (readingBlock == null) {
+			if (other.readingBlock != null)
+				return false;
+		} else if (!readingBlock.equals(other.readingBlock))
+			return false;
 		if (readingTypeId == null) {
 			if (other.readingTypeId != null)
 				return false;
 		} else if (!readingTypeId.equals(other.readingTypeId))
-			return false;
-		if (meterReferenceId == null) {
-			if (other.meterReferenceId != null)
-				return false;
-		} else if (!meterReferenceId.equals(other.meterReferenceId))
 			return false;
 		if (referenceIdNamepsace == null) {
 			if (other.referenceIdNamepsace != null)
@@ -231,12 +266,16 @@ public class IntervalReading extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "IntervalReading [meterAsset=" + meterAsset + ", meterReferenceId="
-				+ meterReferenceId + ", referenceIdType=" + referenceIdType
+		return "IntervalReading [meterAsset=" + meterAsset
+				+ ", meterReferenceId=" + meterReferenceId
+				+ ", referenceIdType=" + referenceIdType
 				+ ", referenceIdNamepsace=" + referenceIdNamepsace
 				+ ", readingTypeId=" + readingTypeId + ", value=" + value
 				+ ", valid=" + valid + ", processed=" + processed
-				+ ", archived=" + archived + ", endTime=" + endTime + "]";
+				+ ", archived=" + archived + ", intervalLength="
+				+ intervalLength + ", readingBlock=" + readingBlock
+				+ ", endTime=" + endTime + ", id=" + id + ", mRID=" + mRID
+				+ "]";
 	}
 	    
 }

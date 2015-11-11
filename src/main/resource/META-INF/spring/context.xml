@@ -193,6 +193,22 @@
 	</bean>
 	
 	
+	<bean id="syncMessageServiceLocationProcessorConfirugarator"  
+			class="hu.bme.mit.v37zen.prepayment.datasync.configurators.IntervalReadingConfigurator">
+			
+		<property name="meterReadingSelector" value="${meterData.xpath.meterData.MeterReadingSelector}"></property>
+		<property name="meterIdSelector" value="${meterData.xpath.meterData.Meter.meterIdSelector}"></property>
+		<property name="meterIdTypeSelector" value="${meterData.xpath.meterData.Meter.meterIdTypeSelector}"></property>
+		<property name="meterIdNamespaceSelector" value="${meterData.xpath.meterData.Meter.meterIdNamespaceSelector}"></property>
+		<property name="intervalBlockSelector" value="${meterData.xpath.meterData.IntervalBlockSelector}"></property>
+		<property name="readingTypeIdSelector" value="${meterData.xpath.meterData.IntervalBlock.readingTypeIdSelector}"></property>
+		<property name="intervalLengthSelector" value="${meterData.xpath.meterData.IntervalBlock.intervalLengthSelector}"></property>
+		<property name="iReadingSelector" value="${meterData.xpath.meterData.IntervalBlock.IReadingSelector}"></property>
+		<property name="valueSelector" value="${meterData.xpath.meterData.IntervalBlock.IReading.valueSelector}"></property>
+		<property name="endTimeSelector" value="${meterData.xpath.meterData.IntervalBlock.IReading.endTimeSelector}"></property>
+		<property name="dateFormatPattern" value="${meterdata.timeformat}"></property>
+	</bean>
+	
 	
 	<bean id="meterDataMessageProcessor"  class="hu.bme.mit.v37zen.prepayment.rating.MeterDataProcessor" scope="prototype">
 		<constructor-arg name="namespaceHandler">
