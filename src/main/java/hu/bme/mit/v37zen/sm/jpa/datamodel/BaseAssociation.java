@@ -1,6 +1,7 @@
 package hu.bme.mit.v37zen.sm.jpa.datamodel;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 @MappedSuperclass  
@@ -25,7 +28,11 @@ public class BaseAssociation implements Serializable {
     @Version  
     private Long version;
 
-    protected String startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    protected Date startDate;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+	private Date endDate;
     
 	protected String status;
 	
@@ -33,7 +40,7 @@ public class BaseAssociation implements Serializable {
 		
 	}
 
-	public BaseAssociation(String startDate, String status) {
+	public BaseAssociation(Date startDate, String status) {
 		super();
 		this.startDate = startDate;
 		this.status = status;
@@ -45,19 +52,26 @@ public class BaseAssociation implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	
+	}	
 	public Long getVersion() {  
         return version;  
     }
@@ -66,7 +80,10 @@ public class BaseAssociation implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result
+				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
@@ -80,10 +97,20 @@ public class BaseAssociation implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BaseAssociation other = (BaseAssociation) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (endDate == null) {
+			if (other.endDate != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!endDate.equals(other.endDate))
+			return false;
+		if (startDate == null) {
+			if (other.startDate != null)
+				return false;
+		} else if (!startDate.equals(other.startDate))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		if (version == null) {
 			if (other.version != null)
@@ -96,8 +123,9 @@ public class BaseAssociation implements Serializable {
 	@Override
 	public String toString() {
 		return "BaseAssociation [id=" + id + ", version=" + version
-				+ ", startDate=" + startDate + ", status=" + status + "]";
-	}  
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", status=" + status + "]";
+	}
 	
 	
 }

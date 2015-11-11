@@ -6,7 +6,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(
         objectName="bean:name=SyncMessageContactProcessorConfigurator",
         description="Manage configuration for the prototype SyncMessageProcessor beans.")
-public class ContactProcessorConfigurator {
+public class ContactProcessorConfigurator extends BaseConfigurator {
 
 	private String contactSelector;
 

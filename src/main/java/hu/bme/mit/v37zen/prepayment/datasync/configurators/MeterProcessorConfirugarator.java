@@ -6,7 +6,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(
         objectName="bean:name=SyncMessageMeterProcessorConfirugarator",
         description="Manage configuration for the prototype SyncMessageProcessor beans.")
-public class MeterProcessorConfirugarator {
+public class MeterProcessorConfirugarator extends BaseConfigurator {
 	
 	private String meterAssetSelector;
 	

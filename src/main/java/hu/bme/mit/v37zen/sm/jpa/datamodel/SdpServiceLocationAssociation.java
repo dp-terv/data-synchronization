@@ -1,5 +1,7 @@
 package hu.bme.mit.v37zen.sm.jpa.datamodel;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -26,7 +28,7 @@ public class SdpServiceLocationAssociation extends BaseAssociation {
 		
 	}
 
-	public SdpServiceLocationAssociation(String startDate, String status,
+	public SdpServiceLocationAssociation(Date startDate, String status,
 			String sdpMRID, String serviceLocationMRID) {
 		super(startDate, status);
 		this.sdpMRID = sdpMRID;

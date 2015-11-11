@@ -96,7 +96,7 @@ public class ServiceLocationNodeMapper implements NodeMapper<ServiceLocation> {
 					".//" + serviceLocationProcessorConfigurator.getParameterNamespace() + ":parameter",
 					namespaces.getNamespaces());
 			List<Parameter> paramList = expr.evaluate(node, new ParameterNodeMapper(namespaces.getNamespaces(),
-					serviceLocationProcessorConfigurator.getParameterNamespace()));
+					serviceLocationProcessorConfigurator.getParameterNamespace(), serviceLocationProcessorConfigurator.getDateFormat()));
 			for (Parameter parameter : paramList) {
 				sl.addParameter(parameter);
 			}

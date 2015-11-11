@@ -1,6 +1,7 @@
 package hu.bme.mit.v37zen.prepayment.datasync.nodemappers;
 
 import hu.bme.mit.v37zen.prepayment.datasync.configurators.AssociationProcessorConfigurator;
+import hu.bme.mit.v37zen.prepayment.util.datetime.DateTimeUtil;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.AccountSDPAssociation;
 
@@ -47,7 +48,7 @@ public class AccountSdpAssociationNodeMapper implements NodeMapper<AccountSDPAss
 		
 		String startDate = evaluate(associationProcessorConfigurator.getAccountSdpStartDateSelector(), node);
 		buff.append("AccountSDPAssociation StartDate: "+ startDate + '\n');
-		accSdpAss.setStartDate(startDate);
+		accSdpAss.setStartDate(DateTimeUtil.stringToDate(startDate, associationProcessorConfigurator.getDateFormat()));
 		
 		String accountMRID = evaluate(associationProcessorConfigurator.getAccountIdSelector(), node);
 		buff.append("AccountSDPAssociation AccountMRID: "+ accountMRID + '\n');

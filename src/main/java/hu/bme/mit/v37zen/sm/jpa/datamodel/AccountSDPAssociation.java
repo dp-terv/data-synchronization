@@ -1,5 +1,7 @@
 package hu.bme.mit.v37zen.sm.jpa.datamodel;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -24,7 +26,7 @@ public class AccountSDPAssociation extends BaseAssociation {
 		super();
 	}
 
-	public AccountSDPAssociation(String startDate, String status) {
+	public AccountSDPAssociation(Date startDate, String status) {
 		super(startDate, status);
 	}
 	
@@ -38,7 +40,7 @@ public class AccountSDPAssociation extends BaseAssociation {
 	}
 	
 	public AccountSDPAssociation(ServiceDeliveryPoint sdpDeliveryPoint,
-			Account account, String startDate, String status) {
+			Account account, Date startDate, String status) {
 		super(startDate, status);
 		this.setServiceDeliveryPoint(sdpDeliveryPoint);
 		this.setAccount(account);

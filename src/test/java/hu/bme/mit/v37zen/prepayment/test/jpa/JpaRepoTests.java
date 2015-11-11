@@ -77,7 +77,7 @@ public class JpaRepoTests {
 		String virtualInd = "sdp01-virtInd";
 		String serviceType = "GASS";
 		String premiseId = "premise01";
-		Parameter parameter = new Parameter("param1", "value1", "active", (new Date()).toString());
+		Parameter parameter = new Parameter("param1", "value1", "active", new Date());
 		
 		
 		ServiceDeliveryPoint sdp = new ServiceDeliveryPoint(mRID, virtualInd, serviceType, premiseId, parameter);	

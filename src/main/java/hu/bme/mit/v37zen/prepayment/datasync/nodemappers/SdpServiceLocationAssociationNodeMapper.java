@@ -1,6 +1,7 @@
 package hu.bme.mit.v37zen.prepayment.datasync.nodemappers;
 
 import hu.bme.mit.v37zen.prepayment.datasync.configurators.AssociationProcessorConfigurator;
+import hu.bme.mit.v37zen.prepayment.util.datetime.DateTimeUtil;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.SdpServiceLocationAssociation;
 
@@ -41,7 +42,7 @@ public class SdpServiceLocationAssociationNodeMapper implements NodeMapper<SdpSe
 		
 		String startDate = evaluate(associationProcessorConfigurator.getSdpServiceLocationStartDateSelector(), node);
 		buff.append("SdpServiceLocationAssociation StartDate: "+ startDate + '\n');
-		sdpSLAss.setStartDate(startDate);
+		sdpSLAss.setStartDate(DateTimeUtil.stringToDate(startDate, associationProcessorConfigurator.getDateFormat()));
 		
 		String serviceLocationMRID = evaluate(associationProcessorConfigurator.getServiceLocationIdSelector(), node);
 		buff.append("SdpServiceLocationAssociation MeterAssetMRID: "+ serviceLocationMRID + '\n');

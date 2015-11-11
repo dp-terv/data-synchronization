@@ -1,11 +1,14 @@
 package hu.bme.mit.v37zen.sm.jpa.datamodel;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Parameter implements Serializable{
@@ -19,14 +22,17 @@ public class Parameter implements Serializable{
 	private String name;
 	private String value;
 	private String status;
-	private String startDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date startDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date endDate;
 	
 	public Parameter() {
 		
 	}	
 	
 	public Parameter(String name, String value, String status,
-			String startDate) {
+			Date startDate) {
 		super();
 		this.name = name;
 		this.value = value;
@@ -51,10 +57,10 @@ public class Parameter implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	public String getName() {
@@ -63,14 +69,18 @@ public class Parameter implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((startDate == null) ? 0 : startDate.hashCode());
@@ -78,6 +88,7 @@ public class Parameter implements Serializable{
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -87,7 +98,10 @@ public class Parameter implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Parameter other = (Parameter) obj;
-		if (id != other.id)
+		if (endDate == null) {
+			if (other.endDate != null)
+				return false;
+		} else if (!endDate.equals(other.endDate))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -111,12 +125,13 @@ public class Parameter implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Parameter [id=" + id + ", value=" + value + ", status="
-				+ status + ", startDate=" + startDate + ", name=" + name + "]";
+		return "Parameter [id=" + id + ", name=" + name + ", value=" + value
+				+ ", status=" + status + ", startDate=" + startDate
+				+ ", endDate=" + endDate + "]";
 	}
 	
-
+	
 }

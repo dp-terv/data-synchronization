@@ -11,7 +11,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(
         objectName="bean:name=SyncMessageSDPProcessorConfigurator",
         description="Manage configuration for the prototype SyncMessageProcessor beans.")
-public class SdpProcessorConfigurator {
+public class SdpProcessorConfigurator extends BaseConfigurator {
 	
 	
 	private String sdpSelector;

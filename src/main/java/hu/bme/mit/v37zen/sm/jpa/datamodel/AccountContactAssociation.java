@@ -1,5 +1,7 @@
 package hu.bme.mit.v37zen.sm.jpa.datamodel;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -24,7 +26,7 @@ public class AccountContactAssociation extends BaseAssociation {
 	public AccountContactAssociation() {
 		super();
 	}
-	public AccountContactAssociation(String startDate, String status, String contactMRID, String accountMRID) {
+	public AccountContactAssociation(Date startDate, String status, String contactMRID, String accountMRID) {
 		super(startDate, status);
 		this.contactMRID = contactMRID;
 		this.accountMRID = accountMRID;

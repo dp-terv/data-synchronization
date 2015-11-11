@@ -5,7 +5,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 
 @ManagedResource(objectName="bean:name=SyncMessageAssociationProcessorConfigurator",
 		description="Manage Xpath selectors for Associations.")
-public class AssociationProcessorConfigurator {
+public class AssociationProcessorConfigurator extends BaseConfigurator {
 
 	private String accountSdpAssociationSelector;
 	private String accountSdpStartDateSelector;

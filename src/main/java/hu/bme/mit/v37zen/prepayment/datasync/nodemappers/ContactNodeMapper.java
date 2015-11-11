@@ -82,7 +82,7 @@ public class ContactNodeMapper implements NodeMapper<Contact> {
 					".//" + contactProcessorConfigurator.getParameterNamespace() + ":parameter",
 					namespaces.getNamespaces());
 			List<Parameter> paramList = expr.evaluate(node, new ParameterNodeMapper(namespaces.getNamespaces(),
-					contactProcessorConfigurator.getParameterNamespace()));
+					contactProcessorConfigurator.getParameterNamespace(), contactProcessorConfigurator.getDateFormat()));
 			for (Parameter parameter : paramList) {
 				contact.addParameter(parameter);
 			}

@@ -3,6 +3,7 @@ package hu.bme.mit.v37zen.prepayment.datasync.nodemappers;
 import java.util.List;
 
 import hu.bme.mit.v37zen.prepayment.datasync.configurators.MeterProcessorConfirugarator;
+import hu.bme.mit.v37zen.prepayment.util.datetime.DateTimeUtil;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.MeterAsset;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.Parameter;
@@ -42,19 +43,19 @@ public class MeterAssetNodeMapper implements NodeMapper<MeterAsset> {
 
 		String firstRead = evaluate(meterProcessorConfirugarator.getFirstReadSelector(), node);
 		buff.append("MeterAsset FirstRead: "+ firstRead + '\n');
-		meterAsset.setFirstRead(firstRead);
+		meterAsset.setFirstRead(DateTimeUtil.stringToDate(firstRead, meterProcessorConfirugarator.getDateFormat()));
 
 		String installDate = evaluate(meterProcessorConfirugarator.getInstallDateSelector(), node);
 		buff.append("MeterAsset InstallDate: "+ installDate + '\n');
-		meterAsset.setInstallDate(installDate);
+		meterAsset.setInstallDate(DateTimeUtil.stringToDate(installDate, meterProcessorConfirugarator.getDateFormat()));
 		
 		String lastRead = evaluate(meterProcessorConfirugarator.getLastReadSelector(), node);
 		buff.append("MeterAsset LastRead: "+ lastRead + '\n');
-		meterAsset.setLastRead(lastRead);
+		meterAsset.setLastRead(DateTimeUtil.stringToDate(lastRead, meterProcessorConfirugarator.getDateFormat()));
 		
 		String manufacturedDate = evaluate(meterProcessorConfirugarator.getManufacturedDateSelector(), node);
 		buff.append("MeterAsset ManufacturedDate: "+ manufacturedDate + '\n');
-		meterAsset.setManufacturedDate(manufacturedDate);
+		meterAsset.setManufacturedDate(DateTimeUtil.stringToDate(manufacturedDate, meterProcessorConfirugarator.getDateFormat()));
 		
 		String serialNumber = evaluate(meterProcessorConfirugarator.getSerialNumberSelector(), node);
 		buff.append("MeterAsset SerialNumber: "+ serialNumber + '\n');
@@ -77,7 +78,7 @@ public class MeterAssetNodeMapper implements NodeMapper<MeterAsset> {
 					".//" + meterProcessorConfirugarator.getParameterNamespace() + ":parameter",
 					namespaces.getNamespaces());		
 			List<Parameter>	paramList = expr.evaluate(node, new ParameterNodeMapper(namespaces.getNamespaces(),
-					meterProcessorConfirugarator.getParameterNamespace()));
+					meterProcessorConfirugarator.getParameterNamespace(), meterProcessorConfirugarator.getDateFormat()));
 			for (Parameter parameter : paramList) {
 				meterAsset.addParameter(parameter);
 			}

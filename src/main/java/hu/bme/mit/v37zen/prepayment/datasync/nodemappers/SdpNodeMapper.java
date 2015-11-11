@@ -67,7 +67,7 @@ public class SdpNodeMapper implements NodeMapper<ServiceDeliveryPoint> {
 					".//" + sdpProcessorConfigurator.getParameterNamespace() + ":parameter",
 					namespaces.getNamespaces());
 			List<Parameter> paramList = expr.evaluate(node, new ParameterNodeMapper(namespaces.getNamespaces(),
-					sdpProcessorConfigurator.getParameterNamespace()));
+					sdpProcessorConfigurator.getParameterNamespace(), sdpProcessorConfigurator.getDateFormat()));
 			for (Parameter parameter : paramList) {
 				sdp.addParameter(parameter);
 			}

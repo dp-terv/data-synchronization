@@ -11,7 +11,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(
         objectName="bean:name=SyncMessageAccountProcessorConfigurator",
         description="Manage configuration for the prototype SyncMessageProcessor beans.")
-public class AccountProcessorConfigurator {
+public class AccountProcessorConfigurator extends BaseConfigurator {
 
 	private String accountSelector;
 	private String nameSelector;
@@ -22,8 +22,6 @@ public class AccountProcessorConfigurator {
 	private String phonNumberSelector;
 	private String mridSelector;
 	private String parameterNamespace;
-	
-	
 
 	@ManagedAttribute
 	public String getMridSelector() {
@@ -114,6 +112,5 @@ public class AccountProcessorConfigurator {
 	public void setParameterNamespace(String parameterNamespace) {
 		this.parameterNamespace = parameterNamespace;
 	}
-	
 	
 }

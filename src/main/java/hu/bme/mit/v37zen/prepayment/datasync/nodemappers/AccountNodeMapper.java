@@ -67,7 +67,7 @@ public class AccountNodeMapper implements NodeMapper<Account> {
 					".//" + accountProcessorConfigurator.getParameterNamespace() + ":parameter",
 					namespaces.getNamespaces());
 			List<Parameter> paramList = expr.evaluate(node, new ParameterNodeMapper(namespaces.getNamespaces(),
-					accountProcessorConfigurator.getParameterNamespace()));
+					accountProcessorConfigurator.getParameterNamespace(), accountProcessorConfigurator.getDateFormat()));
 			for (Parameter parameter : paramList) {
 				account.addParameter(parameter);
 			}

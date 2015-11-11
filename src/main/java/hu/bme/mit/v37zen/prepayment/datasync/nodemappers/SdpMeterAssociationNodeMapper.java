@@ -1,6 +1,7 @@
 package hu.bme.mit.v37zen.prepayment.datasync.nodemappers;
 
 import hu.bme.mit.v37zen.prepayment.datasync.configurators.AssociationProcessorConfigurator;
+import hu.bme.mit.v37zen.prepayment.util.datetime.DateTimeUtil;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.SdpMeterAssociation;
 
@@ -43,7 +44,7 @@ public static Logger logger = LoggerFactory.getLogger(SdpMeterAssociationNodeMap
 		
 		String startDate = evaluate(associationProcessorConfigurator.getSdpMeterStartDateSelector(), node);
 		buff.append("SdpMeterAssociation StartDate: "+ startDate + '\n');
-		sdpMeterAss.setStartDate(startDate);
+		sdpMeterAss.setStartDate(DateTimeUtil.stringToDate(startDate, associationProcessorConfigurator.getDateFormat()));
 		
 		String meterAssetMRID = evaluate(associationProcessorConfigurator.getMeterIdSelector(), node);
 		buff.append("SdpMeterAssociation MeterAssetMRID: "+ meterAssetMRID + '\n');

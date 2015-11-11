@@ -1,6 +1,7 @@
 package hu.bme.mit.v37zen.prepayment.datasync.nodemappers;
 
 import hu.bme.mit.v37zen.prepayment.datasync.configurators.AssociationProcessorConfigurator;
+import hu.bme.mit.v37zen.prepayment.util.datetime.DateTimeUtil;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.AccountContactAssociation;
 
@@ -42,7 +43,7 @@ public class AccountContactAssociationNodeMapper implements NodeMapper<AccountCo
 		
 		String startDate = evaluate(associationProcessorConfigurator.getAccountContactStartDateSelector(), node);
 		buff.append("AccountContactAssociation StartDate: "+ startDate + '\n');
-		accContactAss.setStartDate(startDate);
+		accContactAss.setStartDate(DateTimeUtil.stringToDate(startDate, associationProcessorConfigurator.getDateFormat()));
 		
 		String accountMRID = evaluate(associationProcessorConfigurator.getAccountIdSelector(), node);
 		buff.append("AccountContactAssociation AccountMRID: "+ accountMRID + '\n');

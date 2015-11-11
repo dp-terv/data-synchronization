@@ -6,7 +6,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(
         objectName="bean:name=SyncMessageServiceLocationProcessorConfigurator",
         description="Manage configuration for the prototype SyncMessageProcessor beans.")
-public class ServiceLocationProcessorConfigurator {
+public class ServiceLocationProcessorConfigurator extends BaseConfigurator {
 
 	private String ServiceLocationSelector;
 

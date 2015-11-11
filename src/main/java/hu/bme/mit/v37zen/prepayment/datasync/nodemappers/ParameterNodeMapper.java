@@ -1,7 +1,9 @@
 package hu.bme.mit.v37zen.prepayment.datasync.nodemappers;
 
+import java.text.DateFormat;
 import java.util.Map;
 
+import hu.bme.mit.v37zen.prepayment.util.datetime.DateTimeUtil;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.Parameter;
 
 import org.springframework.xml.xpath.NodeMapper;
@@ -14,10 +16,12 @@ public class ParameterNodeMapper implements NodeMapper<Parameter>{
 	
 	private Map<String,String> namespaces;
 	private String nameSpace;
+	private DateFormat dateFormat;
 
-	public ParameterNodeMapper(Map<String,String> namespaces, String nameSpace) {
+	public ParameterNodeMapper(Map<String,String> namespaces, String nameSpace, DateFormat dateFormat) {
 		this.namespaces = namespaces;
 		this.nameSpace = nameSpace;
+		this.dateFormat = dateFormat;
 	}
 
 	public Parameter mapNode(Node node, int nodeNum) throws DOMException {
@@ -38,7 +42,7 @@ public class ParameterNodeMapper implements NodeMapper<Parameter>{
 		
 		expr = XPathExpressionFactory.
 				createXPathExpression(".//"+nameSpace+":startDate/text()", namespaces);
-		param.setStartDate(expr.evaluateAsString(node));
+		param.setStartDate(DateTimeUtil.stringToDate(expr.evaluateAsString(node), dateFormat));
 		
 		return param;
 	}
