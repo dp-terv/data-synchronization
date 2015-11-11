@@ -193,7 +193,7 @@
 	</bean>
 	
 	
-	<bean id="syncMessageServiceLocationProcessorConfirugarator"  
+	<bean id="intervalReadingConfigurator"  
 			class="hu.bme.mit.v37zen.prepayment.datasync.configurators.IntervalReadingConfigurator">
 			
 		<property name="meterReadingSelector" value="${meterData.xpath.meterData.MeterReadingSelector}"></property>

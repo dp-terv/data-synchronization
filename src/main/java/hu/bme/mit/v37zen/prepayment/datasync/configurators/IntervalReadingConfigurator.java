@@ -9,7 +9,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  *
  */
 @ManagedResource(
-        objectName="bean:name=SyncMessageSDPProcessorConfigurator",
+        objectName="bean:name=IntervalReadingConfigurator",
         description="")
 public class IntervalReadingConfigurator extends BaseConfigurator {
 
