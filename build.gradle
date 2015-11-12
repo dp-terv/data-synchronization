@@ -67,6 +67,9 @@ eclipse {
 	}
 	classpath {
 		containers 'org.springsource.ide.eclipse.gradle.classpathcontainer'
+		plusConfigurations += [configurations.providedCompile]
+		plusConfigurations += [configurations.loggingLib]
+		plusConfigurations += [configurations.testLib]
 	}
 }
 
@@ -86,6 +89,9 @@ ext {
 
 dependencies {
 
+	compile fileTree(dir: "../data-model/build/libs", include: '*.jar')
+	
+
 	ext.libsBaseDir = 's:/eclipse_workspaces/DPT_II_2/dependency-management-project/'
 
 	//ext.datamodelVersion = '1.0'
@@ -95,7 +101,7 @@ dependencies {
 	
 	//providedCompile fileTree(dir: '../lib', include: '*.jar')
 	
-	compile fileTree(dir: "${libsBaseDir}${libCompile}", include: '*.jar')
+	providedCompile fileTree(dir: "${libsBaseDir}${libCompile}", include: '*.jar')
 	providedCompile fileTree(dir: "${libsBaseDir}${libProvidedCompile}", include: '*.jar')	
 	
 	//compile fileTree(dir: "${libsBaseDir}${libDrools}", include: '*.jar')
