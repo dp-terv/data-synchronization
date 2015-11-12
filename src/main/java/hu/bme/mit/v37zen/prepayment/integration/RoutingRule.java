@@ -1,16 +1,13 @@
 package hu.bme.mit.v37zen.prepayment.integration;
 
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
+import hu.bme.mit.v37zen.prepayment.util.xml.XPathUtil;
 
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.xml.xpath.XPathException;
-import org.springframework.xml.xpath.XPathExpression;
-import org.springframework.xml.xpath.XPathExpressionFactory;
-import org.springframework.xml.xpath.XPathParseException;
 import org.w3c.dom.Node;
 
 public class RoutingRule {	
@@ -41,6 +38,11 @@ public class RoutingRule {
 		this.namespaceHandler = namespaces;
 		this.route = route;
 	}
+	
+	public boolean evaluate(Node node) {
+		String content = XPathUtil.evaluateAsString(contentSelectorString, node, namespaceHandler.getNamespaces());
+		return exceptedContent.matcher(content).matches();
+	}
 
 	public String getContentSelectorString() {
 		return contentSelectorString;
@@ -68,24 +70,6 @@ public class RoutingRule {
 
 	public void setRoute(MessageChannel route) {
 		this.route = route;
-	}
-
-	public boolean evaluate(Node node) {
-		try {
-			logger.debug("");
-			XPathExpression expr = XPathExpressionFactory
-					.createXPathExpression(this.contentSelectorString,
-							namespaceHandler.getNamespaces());
-
-			return exceptedContent.matcher(expr.evaluateAsString(node))
-					.matches();
-
-		} catch (XPathParseException e) {
-			logger.error(e.getMessage());
-		} catch (XPathException e) {
-			logger.error(e.getMessage());
-		}
-		return false;
 	}
 
 	public NamespaceHandler getNamespaceHandler() {

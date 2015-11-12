@@ -19,7 +19,7 @@
 	<int:service-activator id="contentBasedRouterServiceActivator" 
 			ref="contentBasedRouter"
 			method="route"
-			input-channel="toXMLHandler">
+			input-channel="toRouter">
 	</int:service-activator>
 	
 	<bean id="contentBasedRouter" class="hu.bme.mit.v37zen.prepayment.integration.ContentBasedRouter">
@@ -29,6 +29,10 @@
 				<entry key="meterDataRoutingRule" value-ref="meterDataRoutingRule" />
 			</map>
 		</constructor-arg>
+		
+		<property name="taskExecutor">
+			<ref bean="routerThreadPoolTaskExecutor"/>
+		</property>
 	</bean>	
 	
 	<!-- "RoutingTable" -->

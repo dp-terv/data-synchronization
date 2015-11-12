@@ -22,9 +22,10 @@
 			</constructor-arg>
 	</bean>
 	
-	<!-- XML Unmarshaller -->
+	<!-- XML Unmarshaller + persiter -->
 	
-	<bean id="syncMessageProcessor"  class="hu.bme.mit.v37zen.prepayment.datasync.SyncMessageProcessor" scope="prototype">
+	<bean id="syncMessageProcessor" scope="prototype"
+			class="hu.bme.mit.v37zen.prepayment.datasync.SyncMessageProcessor">
 		<constructor-arg name="namespaces">
 			<ref bean="namespaceHandler" />
 		</constructor-arg>

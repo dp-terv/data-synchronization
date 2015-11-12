@@ -1,6 +1,7 @@
 package hu.bme.mit.v37zen.prepayment.datasync.nodemappers;
 
 import hu.bme.mit.v37zen.prepayment.datasync.configurators.ContactProcessorConfigurator;
+import hu.bme.mit.v37zen.prepayment.util.xml.AbstractNodeMapper;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.Contact;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.Parameter;
@@ -9,7 +10,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.xml.xpath.NodeMapper;
 import org.springframework.xml.xpath.XPathException;
 import org.springframework.xml.xpath.XPathExpression;
 import org.springframework.xml.xpath.XPathExpressionFactory;
@@ -17,21 +17,17 @@ import org.springframework.xml.xpath.XPathParseException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
-public class ContactNodeMapper implements NodeMapper<Contact> {
+public class ContactNodeMapper extends AbstractNodeMapper<Contact> {
 	
 	public static Logger logger = LoggerFactory.getLogger(ContactNodeMapper.class);
-	
-	private NamespaceHandler namespaces;
 
 	private ContactProcessorConfigurator contactProcessorConfigurator;
 	
 	public ContactNodeMapper(ContactProcessorConfigurator contactProcessorConfigurator, NamespaceHandler namespaces) {
-		super();
-		this.namespaces = namespaces;
+		super(namespaces);
 		this.contactProcessorConfigurator = contactProcessorConfigurator;
 	}
-
-
+	
 	public Contact mapNode(Node node, int nodeNum) throws DOMException {
 		
 		Contact contact = new Contact();
@@ -97,46 +93,13 @@ public class ContactNodeMapper implements NodeMapper<Contact> {
 		
 		return contact;
 	}
-	
-	protected String evaluate(String expression, Node node){
-		if(expression == null || expression.isEmpty()){
-			return "";
-		}
-		
-		XPathExpression expr = null;
-		
-		try {
-			expr = XPathExpressionFactory.createXPathExpression(expression, getNamespaces().getNamespaces());
-		} catch (XPathParseException e) {
-			logger.error(e.getMessage());
-			return null;
-		}
-		
-		try {
-			return expr.evaluateAsString(node);
-		} catch (XPathException e) {
-			logger.error(e.getMessage());
-			return null;
-		}
-	}
-
-	public NamespaceHandler getNamespaces() {
-		return namespaces;
-	}
-
-	public void setNamespaces(NamespaceHandler namespaces) {
-		this.namespaces = namespaces;
-	}
-
 
 	public ContactProcessorConfigurator getContactProcessorConfigurator() {
 		return contactProcessorConfigurator;
 	}
 
-
 	public void setContactProcessorConfigurator(
 			ContactProcessorConfigurator contactProcessorConfigurator) {
 		this.contactProcessorConfigurator = contactProcessorConfigurator;
-	}
-	
+	}	
 }

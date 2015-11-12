@@ -1,6 +1,5 @@
 package hu.bme.mit.v37zen.prepayment.rating;
 
-import hu.bme.mit.v37zen.prepayment.datasync.configurators.IntervalReadingConfigurator;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.prepayment.util.xml.XPathUtil;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.meterreading.IntervalReading;
@@ -30,6 +29,7 @@ public class IntervalReadingNodeMapper {
 	
 	public List<IntervalReading> mapMeterReading(Node meterReading){
 		List<IntervalReading> intervalReadings = new ArrayList<IntervalReading>();
+		StringBuffer sb = new StringBuffer();
 		
 		String meterId = evaluateAsString(
 				intervalReadingConfigurator.getMeterIdSelector(), meterReading);
@@ -77,8 +77,10 @@ public class IntervalReadingNodeMapper {
 				ir.setValue(value);
 				
 				intervalReadings.add(ir);
+				sb.append(ir.toString() + '\n');
 			}
 		}
+		logger.debug("Iterval Readings:\n" + sb.toString());
 		return intervalReadings;
 	}
 	

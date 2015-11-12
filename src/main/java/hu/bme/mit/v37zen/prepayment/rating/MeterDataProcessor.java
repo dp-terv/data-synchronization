@@ -1,7 +1,5 @@
 package hu.bme.mit.v37zen.prepayment.rating;
 
-import hu.bme.mit.v37zen.prepayment.datasync.configurators.IntervalReadingConfigurator;
-import hu.bme.mit.v37zen.prepayment.util.xml.DOMNodeToString;
 import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
 import hu.bme.mit.v37zen.sm.jpa.datamodel.meterreading.IntervalReading;
 import hu.bme.mit.v37zen.sm.jpa.repositories.IntervalReadingRepository;
@@ -40,16 +38,11 @@ public class MeterDataProcessor implements Runnable, ApplicationContextAware {
 	}
 
 	public void run() {
-		
-		logger.debug((new DOMNodeToString()).nodeToString(xmlNode));
-		
 		if(this.xmlNode == null){
 			logger.warn("Meter reading message is null!"); 
 			return;
 		}
-		
 		logger.info("Meter reading processing has started."); 
-		
 		try {
 	
 			

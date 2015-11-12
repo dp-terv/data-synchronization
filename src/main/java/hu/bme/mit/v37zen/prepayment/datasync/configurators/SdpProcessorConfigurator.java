@@ -1,5 +1,7 @@
 package hu.bme.mit.v37zen.prepayment.datasync.configurators;
 
+import hu.bme.mit.v37zen.prepayment.util.configurators.BaseConfigurator;
+
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
@@ -10,7 +12,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  */
 @ManagedResource(
         objectName="bean:name=SyncMessageSDPProcessorConfigurator",
-        description="Manage configuration for the prototype SyncMessageProcessor beans.")
+        description="SdpProcessorConfigurator")
 public class SdpProcessorConfigurator extends BaseConfigurator {
 	
 	

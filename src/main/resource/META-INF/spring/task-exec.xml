@@ -8,6 +8,13 @@
     
 
 	<!--  Task Executors  -->
+	<bean id="routerThreadPoolTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	    <property name="corePoolSize" value="${router.ThreadPoolTaskExecutor.corePoolSize}" />
+	    <property name="maxPoolSize" value="${router.ThreadPoolTaskExecutor.maxPoolSize}" />
+	    <property name="queueCapacity" value="${router.ThreadPoolTaskExecutor.queueCapacity}" />
+	    
+	    <qualifier value="routerThreadPoolTaskExecutor"></qualifier>
+	</bean>
 	
 	<bean id="dataSyncThreadPoolTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
 	    <property name="corePoolSize" value="${dataSync.ThreadPoolTaskExecutor.corePoolSize}" />

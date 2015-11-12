@@ -1,10 +1,12 @@
 package hu.bme.mit.v37zen.prepayment.datasync.configurators;
 
+import hu.bme.mit.v37zen.prepayment.util.configurators.BaseConfigurator;
+
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 @ManagedResource(objectName="bean:name=SyncMessageAssociationProcessorConfigurator",
-		description="Manage Xpath selectors for Associations.")
+		description="AssociationProcessorConfigurator.")
 public class AssociationProcessorConfigurator extends BaseConfigurator {
 
 	private String accountSdpAssociationSelector;

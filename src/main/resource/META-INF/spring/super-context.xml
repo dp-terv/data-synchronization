@@ -18,11 +18,11 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
     
+    <import resource="classpath:META-INF/spring/task-exec.xml"/>
+    
     <import resource="classpath:META-INF/spring/context.xml"/>
     <import resource="classpath:META-INF/spring/file-poller.xml"/>
     <import resource="classpath:META-INF/spring/content-base-router.xml"/>
-    
-    <import resource="classpath:META-INF/spring/task-exec.xml"/>
     
     <import resource="classpath:META-INF/spring/syncdata.xml"/>
     <import resource="classpath:META-INF/spring/meterdata.xml"/>

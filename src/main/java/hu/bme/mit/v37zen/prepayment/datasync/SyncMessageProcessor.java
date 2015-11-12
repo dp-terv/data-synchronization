@@ -74,7 +74,7 @@ public class SyncMessageProcessor implements Runnable, ApplicationContextAware {
 			return;
 		}
 		try{
-			logger.info("Sync message processing has started."); 
+			logger.info("Sync message processing has started.");
 			
 			SyncData sd = new SyncMessageMapper(namespaces, accountProcessorConfigurator, sdpProcessorConfigurator, 
 					associationProcessorConfigurator, meterProcessorConfirugarator, contactProcessorConfigurator, 
@@ -122,8 +122,7 @@ public class SyncMessageProcessor implements Runnable, ApplicationContextAware {
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			logger.info("Sync message processing has failed."); 
-		}		
-		
+		}				
 	}
 
 	@Override

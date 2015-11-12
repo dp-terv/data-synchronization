@@ -21,9 +21,10 @@
 			</constructor-arg>
 	</bean>
 	
-	<!-- XML Unmarshaller -->
+	<!-- XML Unmarshaller + persiter -->
 	
-	<bean id="meterDataMessageProcessor"  class="hu.bme.mit.v37zen.prepayment.rating.MeterDataProcessor" scope="prototype">
+	<bean id="meterDataMessageProcessor" scope="prototype"
+			class="hu.bme.mit.v37zen.prepayment.rating.MeterDataProcessor">
 		<constructor-arg name="namespaceHandler">
 			<ref bean="namespaceHandler" />
 		</constructor-arg>	
@@ -35,7 +36,7 @@
 	<!-- Configurator -->
 		
 	<bean id="intervalReadingConfigurator"  
-			class="hu.bme.mit.v37zen.prepayment.datasync.configurators.IntervalReadingConfigurator">
+			class="hu.bme.mit.v37zen.prepayment.rating.IntervalReadingConfigurator">
 			
 		<property name="meterReadingSelector" value="${meterData.xpath.meterData.MeterReadingSelector}"></property>
 		<property name="meterIdSelector" value="${meterData.xpath.meterData.Meter.meterIdSelector}"></property>

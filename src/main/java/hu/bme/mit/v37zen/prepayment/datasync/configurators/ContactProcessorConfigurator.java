@@ -1,11 +1,13 @@
 package hu.bme.mit.v37zen.prepayment.datasync.configurators;
 
+import hu.bme.mit.v37zen.prepayment.util.configurators.BaseConfigurator;
+
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 @ManagedResource(
         objectName="bean:name=SyncMessageContactProcessorConfigurator",
-        description="Manage configuration for the prototype SyncMessageProcessor beans.")
+        description="ContactProcessorConfigurator")
 public class ContactProcessorConfigurator extends BaseConfigurator {
 
 	private String contactSelector;

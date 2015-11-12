@@ -1,11 +1,13 @@
 package hu.bme.mit.v37zen.prepayment.datasync.configurators;
 
+import hu.bme.mit.v37zen.prepayment.util.configurators.BaseConfigurator;
+
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 @ManagedResource(
         objectName="bean:name=SyncMessageServiceLocationProcessorConfigurator",
-        description="Manage configuration for the prototype SyncMessageProcessor beans.")
+        description="ServiceLocationProcessorConfigurator")
 public class ServiceLocationProcessorConfigurator extends BaseConfigurator {
 
 	private String ServiceLocationSelector;

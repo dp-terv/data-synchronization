@@ -3,9 +3,6 @@
  */
 package hu.bme.mit.v37zen.prepayment.rating;
 
-import hu.bme.mit.v37zen.prepayment.util.xml.DOMNodeToString;
-import hu.bme.mit.v37zen.prepayment.util.xml.NamespaceHandler;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -23,8 +20,6 @@ public class MeterDataMessageHandler implements ApplicationContextAware {
 	public final static Logger logger = LoggerFactory.getLogger(MeterDataMessageHandler.class);
 	
 	private ThreadPoolTaskExecutor taskExecutor;
-		
-	private NamespaceHandler namespaceHandler;
 	
 	private ApplicationContext applicationContext;
 		
@@ -33,22 +28,19 @@ public class MeterDataMessageHandler implements ApplicationContextAware {
 		this.taskExecutor = taskExecutorPool;
 	}
 	
-	public void process(Document document) {
-		
-		String xml = (new DOMNodeToString()).nodeToString(document);
+	public void process(Document document) {		
 		logger.info("Meter Data message has arrived.");
-		logger.debug('\n' + xml);
+		//String xml = (new DOMNodeToString()).nodeToString(document);
+		//logger.debug('\n' + xml);
 		
 		MeterDataProcessor ratingProcessor = applicationContext.getBean(MeterDataProcessor.class);
 		ratingProcessor.setXmlNode(document);
 		taskExecutor.execute(ratingProcessor);
 	}
 	
-	
 	public ThreadPoolTaskExecutor getTaskExecutor() {
 		return taskExecutor;
 	}
-
 
 	public void setTaskExecutor(ThreadPoolTaskExecutor taskExecutor) {
 		this.taskExecutor = taskExecutor;
@@ -56,14 +48,7 @@ public class MeterDataMessageHandler implements ApplicationContextAware {
 
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
+		
 		this.applicationContext = applicationContext;
-	}
-
-	public NamespaceHandler getNamespaceHandler() {
-		return namespaceHandler;
-	}
-
-	public void setNamespaceHandler(NamespaceHandler namespaceHandler) {
-		this.namespaceHandler = namespaceHandler;
 	}
 }

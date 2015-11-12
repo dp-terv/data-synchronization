@@ -1,4 +1,4 @@
-package hu.bme.mit.v37zen.prepayment.datasync.configurators;
+package hu.bme.mit.v37zen.prepayment.util.configurators;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -6,9 +6,10 @@ import java.text.SimpleDateFormat;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 public class BaseConfigurator {
+	public static final String DEFAULT_PATTERN = "YYYY-MM-dd'T'HH:mm:ss";
 	
-	private String dateFormatPattern;
-	private DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd'T'HH:mm:ss");
+	private String dateFormatPattern = DEFAULT_PATTERN;
+	private DateFormat dateFormat = new SimpleDateFormat(DEFAULT_PATTERN);
 	
 	@ManagedAttribute
 	public String getDateFormatPattern() {

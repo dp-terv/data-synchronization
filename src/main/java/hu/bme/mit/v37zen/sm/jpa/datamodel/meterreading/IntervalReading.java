@@ -44,8 +44,12 @@ public class IntervalReading extends BaseEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date insertTime;
+	
 	public IntervalReading() {
 		super();
+		this.insertTime = new Date();
 	}
 
 	public IntervalReading(MeterAsset meterAsset, String meterReferenceId,
@@ -66,6 +70,8 @@ public class IntervalReading extends BaseEntity {
 		this.intervalLength = intervalLength;
 		this.readingBlock = readingBlock;
 		this.endTime = endTime;
+
+		this.insertTime = new Date();
 	}
 
 	public String getReadingTypeId() {
@@ -164,6 +170,14 @@ public class IntervalReading extends BaseEntity {
 		this.readingBlock = readingBlock;
 	}
 
+	public Date getInsertTime() {
+		return insertTime;
+	}
+
+	public void setInsertTime(Date insertTime) {
+		this.insertTime = insertTime;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -171,7 +185,10 @@ public class IntervalReading extends BaseEntity {
 		result = prime * result
 				+ ((archived == null) ? 0 : archived.hashCode());
 		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-		result = prime * result + intervalLength;
+		result = prime * result
+				+ ((insertTime == null) ? 0 : insertTime.hashCode());
+		result = prime * result
+				+ ((intervalLength == null) ? 0 : intervalLength.hashCode());
 		result = prime * result
 				+ ((meterAsset == null) ? 0 : meterAsset.hashCode());
 		result = prime
@@ -213,7 +230,15 @@ public class IntervalReading extends BaseEntity {
 				return false;
 		} else if (!endTime.equals(other.endTime))
 			return false;
-		if (intervalLength != other.intervalLength)
+		if (insertTime == null) {
+			if (other.insertTime != null)
+				return false;
+		} else if (!insertTime.equals(other.insertTime))
+			return false;
+		if (intervalLength == null) {
+			if (other.intervalLength != null)
+				return false;
+		} else if (!intervalLength.equals(other.intervalLength))
 			return false;
 		if (meterAsset == null) {
 			if (other.meterAsset != null)
@@ -273,8 +298,8 @@ public class IntervalReading extends BaseEntity {
 				+ ", valid=" + valid + ", processed=" + processed
 				+ ", archived=" + archived + ", intervalLength="
 				+ intervalLength + ", readingBlock=" + readingBlock
-				+ ", endTime=" + endTime + ", id=" + id + ", mRID=" + mRID
-				+ "]";
+				+ ", endTime=" + endTime + ", insertTime=" + insertTime
+				+ ", id=" + id + ", mRID=" + mRID + "]";
 	}
 	    
 }

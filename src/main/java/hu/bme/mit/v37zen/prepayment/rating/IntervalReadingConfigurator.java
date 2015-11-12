@@ -1,4 +1,6 @@
-package hu.bme.mit.v37zen.prepayment.datasync.configurators;
+package hu.bme.mit.v37zen.prepayment.rating;
+
+import hu.bme.mit.v37zen.prepayment.util.configurators.BaseConfigurator;
 
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
@@ -10,7 +12,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  */
 @ManagedResource(
         objectName="bean:name=IntervalReadingConfigurator",
-        description="")
+        description="IntervalReadingConfigurator")
 public class IntervalReadingConfigurator extends BaseConfigurator {
 
 	private String meterReadingSelector;

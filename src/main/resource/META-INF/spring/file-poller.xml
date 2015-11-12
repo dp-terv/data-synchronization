@@ -28,13 +28,13 @@
 	
 	<int:transformer id="xmlTransformer"
 				input-channel="fileToTransformerChannel"  
-				output-channel="toXMLHandler" 
+				output-channel="toRouter" 
 				ref="defXmlTransormer" 
 				method="convertToDocument">
 	</int:transformer>
 	<bean id="defXmlTransormer" class="org.springframework.integration.xml.DefaultXmlPayloadConverter"></bean>
 	
 	
-	<int:channel id="toXMLHandler"></int:channel>
+	<int:channel id="toRouter"></int:channel>
 	
 </beans>
