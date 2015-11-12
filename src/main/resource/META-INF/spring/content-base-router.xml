@@ -22,7 +22,7 @@
 			input-channel="toRouter">
 	</int:service-activator>
 	
-	<bean id="contentBasedRouter" class="hu.bme.mit.v37zen.prepayment.integration.ContentBasedRouter">
+	<bean id="contentBasedRouter" class="hu.bme.mit.v37zen.prepayment.integration.xpath.ContentBasedRouter">
 		<constructor-arg name="routingTable">
 			<map>
 				<entry key="syncMessageRoutingRule" value-ref="syncMessageRoutingRule" />
@@ -36,7 +36,7 @@
 	</bean>	
 	
 	<!-- "RoutingTable" -->
-	<bean id="syncMessageRoutingRule"  class="hu.bme.mit.v37zen.prepayment.integration.RoutingRule">
+	<bean id="syncMessageRoutingRule"  class="hu.bme.mit.v37zen.prepayment.integration.xpath.RoutingRule">
 		<constructor-arg name="namespaces">
 			<ref bean="namespaceHandler" />
 			<!-- Defined in: META-INF/context.xml -->
@@ -48,7 +48,7 @@
 		</constructor-arg>
 	</bean>
 	
-	<bean id="meterDataRoutingRule"  class="hu.bme.mit.v37zen.prepayment.integration.RoutingRule">
+	<bean id="meterDataRoutingRule"  class="hu.bme.mit.v37zen.prepayment.integration.xpath.RoutingRule">
 		<constructor-arg name="namespaces">
 			<ref bean="namespaceHandler" />
 			<!-- Defined in: META-INF/context.xml -->
