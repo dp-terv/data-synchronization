@@ -5,13 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Debug {
+public class DataSyncDebug {
 	
-	public final static Logger logger = LoggerFactory.getLogger(Debug.class);
+	public final static Logger logger = LoggerFactory.getLogger(DataSyncDebug.class);
 
 	public static void main(String[] args) {
 			
-//		logger.debug("Debug");
+//		logger.debug("DataSyncDebug");
 //		logger.info("Info");
 //		logger.warn("Warn");
 //		logger.error("Error");

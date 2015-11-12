@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/META-INF/spring/super-context.xml")
-public class EndToEndTest {
+public class DataSyncEndToEndTest {
 
 	@Test
 	public void main() throws InterruptedException{
