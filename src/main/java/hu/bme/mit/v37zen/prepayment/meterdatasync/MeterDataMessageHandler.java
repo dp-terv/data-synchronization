@@ -1,7 +1,7 @@
 /**
  * 
  */
-package hu.bme.mit.v37zen.prepayment.rating;
+package hu.bme.mit.v37zen.prepayment.meterdatasync;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

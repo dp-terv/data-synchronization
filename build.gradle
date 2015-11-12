@@ -89,6 +89,7 @@ ext {
 
 dependencies {
 
+	compile fileTree(dir: "../util-lib/build/libs", include: '*.jar')
 	compile fileTree(dir: "../data-model/build/libs", include: '*.jar')
 	
 

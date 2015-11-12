@@ -1,4 +1,4 @@
-package hu.bme.mit.v37zen.prepayment.rating;
+package hu.bme.mit.v37zen.prepayment.meterdatasync;
 
 import hu.bme.mit.v37zen.prepayment.util.configurators.BaseConfigurator;
 
